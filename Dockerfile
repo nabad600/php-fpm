@@ -39,17 +39,12 @@ RUN curl https://getcomposer.org/download/1.8.4/composer.phar > /tmp/composer.ph
     && chmod +x /tmp/wp-cli.phar \
     && mv /tmp/wp-cli.phar /usr/local/bin/wp
 
+COPY docker-entrypoint.sh /usr/local/bin/
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+
 WORKDIR /var/www
 
 CMD ["php-fpm"]
 
 EXPOSE 9000
-
-COPY docker-entrypoint.sh /usr/local/bin/
-
-ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["%%CMD%%"]
-COPY docker-entrypoint.sh /usr/local/bin/
-
-ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["%%CMD%%"]
